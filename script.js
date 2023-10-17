@@ -72,4 +72,3 @@ const listaPerguntas = [
   
   // Começa
   perguntar();
-  
