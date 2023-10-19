@@ -61,11 +61,4 @@ function mostraResultado() {
   elementoResultado.classList.add("mostrar");
 }
 
-function jogarNovamente() {
-  perguntaAtual = 0;
-  pontos = 0;
-  elementoResultado.classList.remove("mostrar");
-  pergunta();
-}
-
 pergunta();
