@@ -27,36 +27,37 @@ const listaPerguntas = [
   const elementoResultado = document.getElementById("container-resultado");
   const botaoJogarNovamente = document.getElementById("novamente-btn");
   
-// 
-  function perguntar() {
-    if (perguntaAtual < listaPerguntas.length) {
-      const perguntaMomento = listaPerguntas[perguntaAtual];
-      textoPergunta.textContent = perguntaMomento.pergunta;
-      caixaOpcoes.innerHTML = "";
-  
-      perguntaMomento.opcoes.forEach((option) => {
-        const elementoOpcoes = document.createElement("button"); //cria botao com alternativas ficou mais fácil assim eu acho :)
-        elementoOpcoes.textContent = option;
-        elementoOpcoes.addEventListener("click", () => corrigirResposta(option));
-        caixaOpcoes.appendChild(elementoOpcoes);
-      });
-    } else {
-      mostrarResultado();
-    }
+function pergunta() {
+  if (perguntaAtual < listaPerguntas.length) {
+    const perguntaMomento = listaPerguntas[perguntaAtual];
+    textoPergunta.textContent = perguntaMomento.pergunta;
+    caixaOpcoes.innerHTML = "";
+    selecionaPergunta(perguntaMomento);
+  } else {
+    mostraResultado();
   }
+}
+
+function selecionaPergunta(perguntaMomento) {
+  for (const opcao of perguntaMomento.opcoes){
+    const elementoOpcoes = document.createElement("button"); //cria botao com alternativas ficou mais fácil assim eu acho :)
+    elementoOpcoes.textContent = opcao;
+    elementoOpcoes.addEventListener("click", () => respostaClicada(opcao));
+    caixaOpcoes.appendChild(elementoOpcoes);  
+  }
+}
 
 // compara a seleção com a resposta
-  function corrigirResposta(selectedOption) {
-    const perguntaMomento = listaPerguntas[perguntaAtual];
-    if (selectedOption === perguntaMomento.resposta) {
-      pontos++;
-    }
-  
-    perguntaAtual++;
-    perguntar();
+function respostaClicada(opcaoSelecionada) {
+  const perguntaMomento = listaPerguntas[perguntaAtual];
+  if (opcaoSelecionada === perguntaMomento.resposta) {
+    pontos++;
   }
+  perguntaAtual++;
+  pergunta();
+}
   
-  function mostrarResultado() {
+  function mostraResultado() {
     textoPergunta.textContent = "Acabou!!!!";
     caixaOpcoes.innerHTML = "";
     resultadoTexto.textContent = `Voce acertou ${pontos} de ${listaPerguntas.length}.`;
@@ -67,8 +68,8 @@ const listaPerguntas = [
     perguntaAtual = 0;
     pontos = 0;
     elementoResultado.style.display = "none";
-    perguntar();
+    pergunta();
   }
   
   // Começa
-  perguntar();
+  pergunta();
