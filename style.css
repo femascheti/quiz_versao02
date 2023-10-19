@@ -51,6 +51,9 @@ body {
     display: none;
   }
   
+#container-resultado.mostrar {
+  display: block;
+}
   #resultado {
     font-size: 1.2em;
     margin-bottom: 20px;

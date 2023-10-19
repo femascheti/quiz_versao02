@@ -31,7 +31,7 @@ function pergunta() {
   if (perguntaAtual < listaPerguntas.length) {
     const perguntaMomento = listaPerguntas[perguntaAtual];
     textoPergunta.textContent = perguntaMomento.pergunta;
-    caixaOpcoes.innerHTML = "";
+    caixaOpcoes.textContent = "";
     selecionaPergunta(perguntaMomento);
   } else {
     mostraResultado();
@@ -59,15 +59,15 @@ function respostaClicada(opcaoSelecionada) {
   
   function mostraResultado() {
     textoPergunta.textContent = "Acabou!!!!";
-    caixaOpcoes.innerHTML = "";
+    caixaOpcoes.textContent = ""; 
     resultadoTexto.textContent = `Voce acertou ${pontos} de ${listaPerguntas.length}.`;
-    elementoResultado.style.display = "block";
+    elementoResultado.classList.add("mostrar");
   }
   
   function jogarNovamente() {
     perguntaAtual = 0;
     pontos = 0;
-    elementoResultado.style.display = "none";
+    elementoResultado.classList.remove("mostrar"); 
     pergunta();
   }
   
